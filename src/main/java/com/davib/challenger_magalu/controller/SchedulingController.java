@@ -22,4 +22,12 @@ public class SchedulingController {
     public ResponseEntity<SchedulingRecordOut> findSchedulingById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(schedulingService.findSchedulingById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<SchedulingRecordOut> cancelingScheduling(@PathVariable("id") Long id) {
+        schedulingService.cancelingScheduling(id);
+        return ResponseEntity.accepted().build();
+    }
 }
+
+

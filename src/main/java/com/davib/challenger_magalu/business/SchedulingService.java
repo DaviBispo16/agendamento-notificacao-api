@@ -3,6 +3,7 @@ package com.davib.challenger_magalu.business;
 import com.davib.challenger_magalu.business.mapper.ISchedulingMapper;
 import com.davib.challenger_magalu.controller.dto.in.SchedulingRecord;
 import com.davib.challenger_magalu.controller.dto.out.SchedulingRecordOut;
+import com.davib.challenger_magalu.infrastructure.entities.Scheduling;
 import com.davib.challenger_magalu.infrastructure.exception.NotFoundException;
 import com.davib.challenger_magalu.infrastructure.repository.SchedulingRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,16 @@ public class SchedulingService {
 
     public SchedulingRecordOut findSchedulingById(Long id) {
         return schedulingMapper.forOut(repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("ID não encontrado")));
+                .orElseThrow(() -> new NotFoundException("ID not found")));
     }
 
+    public void cancelingScheduling(Long id) {
+        Scheduling scheduling = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException(("Id not found")));
+
+        repository.save(
+                schedulingMapper.forEntityCancelled(scheduling)
+        );
+    }
 
 }
