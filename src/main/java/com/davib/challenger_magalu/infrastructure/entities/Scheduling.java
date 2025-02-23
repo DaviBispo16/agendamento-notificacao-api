@@ -31,6 +31,6 @@ public class Scheduling {
     @PrePersist
     private void prePersist() {
         dateTimeScheduling = LocalDateTime.now();
-        statusNotification = StatusNotificationEnum.AGENDADO;
+        statusNotification = StatusNotificationEnum.SCHEDULED;
     }
 }
